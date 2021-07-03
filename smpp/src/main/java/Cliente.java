@@ -8,6 +8,7 @@
  *
  * @author joaov
  */
-public class HelloWorld {
-    
+public class Cliente {
+    int idcli;
+    String nome, telefone;
 }
