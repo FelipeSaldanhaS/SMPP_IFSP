@@ -37,11 +37,11 @@ public class Funcionario {
         this.tipo = tipo;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
@@ -86,8 +86,8 @@ public class Funcionario {
     }
     
     
-    private int idfunc, tipo, telefone;
-    private String cpf, nome, endereco, email, senha;
+    private int idfunc, tipo;
+    private String cpf, nome, endereco, email, senha, telefone;
     private Connection conn;
     
     Funcionario() {
@@ -116,7 +116,7 @@ public class Funcionario {
 			preparedStatement.setInt(4, this.idfunc);
                         preparedStatement.setString(5, this.nome);
                         preparedStatement.setString(6, this.endereco);
-                        preparedStatement.setInt(7, this.telefone);
+                        preparedStatement.setString(7, this.telefone);
                         preparedStatement.setString(8, this.getEmail());
 			preparedStatement.execute();
                         res = 1;
@@ -131,7 +131,7 @@ public class Funcionario {
     
     public int CriarFunc(){
         int res = 0;
-        String sql = "insert into loginfuncionario(senha,tipo,cpf,idfunc,nome,endereco,telefone,email)values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into loginfuncionario(MD5(senha),tipo,cpf,idfunc,nome,endereco,telefone,email)values(?,?,?,?,?,?,?,?)";
         try(PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
 			
 			preparedStatement.setString(1, this.senha);
@@ -140,7 +140,7 @@ public class Funcionario {
 			preparedStatement.setInt(4, this.idfunc);
                         preparedStatement.setString(5, this.nome);
                         preparedStatement.setString(6, this.endereco);
-                        preparedStatement.setInt(7, this.telefone);
+                        preparedStatement.setString(7, this.telefone);
                         preparedStatement.setString(8, this.getEmail());
 			//executando comando sql
 			

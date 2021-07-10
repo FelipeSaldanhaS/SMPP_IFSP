@@ -196,7 +196,22 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
     private void btn_CriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CriarActionPerformed
        Funcionario f = new Funcionario();
-       f.setSenha("");
+       String Senha = new String((txt_Senha.getPassword()));
+       String Nome = txt_Nome.getText();
+       int Tipo = Integer.parseInt(txt_Tipo.getText());
+       String Endereco = txt_Endereco.getText();
+       String Telefone = txt_Tel.getText();
+       String CPF = txt_CPF.getText();
+       String Email = txt_Email.getText();
+       
+       f.setSenha(Senha);
+       f.setNome(Nome);
+       f.setTipo(Tipo);
+       f.setEndereco(Endereco);
+       f.setTelefone(Telefone);
+       f.setCpf(CPF);
+       f.setEmail(Email);
+       int res = f.CriarFunc();
     }//GEN-LAST:event_btn_CriarActionPerformed
 
     /**
