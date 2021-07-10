@@ -108,7 +108,7 @@ public class Funcionario {
     
     public int AlterarFunc(){
        int res = 0;        
-        String sql = "update loginfuncionario set senha = ?, tipo = ?, cpf = ?, idfunc = ?, nome = ?, endereco = ?, telefone = ?, email = ?";
+        String sql = "update loginfuncionario set senha = MD5(?), tipo = ?, cpf = ?, idfunc = ?, nome = ?, endereco = ?, telefone = ?, email = ? WHERE idfunc = ?";
             try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
 			preparedStatement.setString(1, this.senha);
 			preparedStatement.setInt(2, this.tipo);
@@ -118,6 +118,7 @@ public class Funcionario {
                         preparedStatement.setString(6, this.endereco);
                         preparedStatement.setString(7, this.telefone);
                         preparedStatement.setString(8, this.getEmail());
+                        preparedStatement.setInt(9, this.idfunc);
 			preparedStatement.execute();
                         res = 1;
                         preparedStatement.close();
@@ -131,7 +132,7 @@ public class Funcionario {
     
     public int CriarFunc(){
         int res = 0;
-        String sql = "insert into loginfuncionario(MD5(senha),tipo,cpf,idfunc,nome,endereco,telefone,email)values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into loginfuncionario(senha,tipo,cpf,idfunc,nome,endereco,telefone,email)values(MD5(?),?,?,?,?,?,?,?)";
         try(PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
 			
 			preparedStatement.setString(1, this.senha);
@@ -149,12 +150,14 @@ public class Funcionario {
 			preparedStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+                        System.err.println(e.getMessage());
 		}
         
         
         return res;
     }
     
+
     public int ExcluirFunc(){
         int res = 0;
         String sql = "delete from loginfuncionario where idfunc = ?";
@@ -172,6 +175,7 @@ public class Funcionario {
        
     
     
+
     public void Sair(){
         
     }
