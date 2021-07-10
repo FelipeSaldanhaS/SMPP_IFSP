@@ -183,7 +183,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_CriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CriarActionPerformed
-        // TODO add your handling code here:
+       Funcionario f = new Funcionario();
+       f.setSenha("");
     }//GEN-LAST:event_btn_CriarActionPerformed
 
     /**
