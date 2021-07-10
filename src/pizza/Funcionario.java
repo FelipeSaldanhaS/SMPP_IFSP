@@ -155,13 +155,22 @@ public class Funcionario {
         return res;
     }
     
-    
-    
-    private int PesquisarPedido(){
+    public int ExcluirFunc(){
         int res = 0;
-        
+        String sql = "delete from loginfuncionario where idfunc = ?";
+        try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+            preparedStatement.setInt(1, this.idfunc);
+            preparedStatement.execute();
+            res = 1;
+            preparedStatement.close();
+        }catch (SQLException e) {
+		e.printStackTrace();
+	}
         return res;
     }
+    
+       
+    
     
     public void Sair(){
         
