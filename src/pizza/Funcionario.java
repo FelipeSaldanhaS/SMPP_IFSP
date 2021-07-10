@@ -5,12 +5,22 @@
  */
 package pizza;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author fefes
  */
 public class Funcionario {
-
+    
     public int getIdfunc() {
         return idfunc;
     }
@@ -66,20 +76,85 @@ public class Funcionario {
     public void setEmail(String email) {
         this.email = email;
     }
-    private int idfunc, tipo, telefone;
-    private String cpf, nome, endereco, email;
     
-    
-    Funcionario(){
-        
+     public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
     
-    protected int AlterarFunc(){
-        int id = getIdfunc();
-        int res = 0;
+    
+    private int idfunc, tipo, telefone;
+    private String cpf, nome, endereco, email, senha;
+    private Connection conn;
+    
+    Funcionario() {
+        try{
+          String myDriver = "org.gjt.mm.mysql.Driver";
+          String myUrl = "jdbc:mysql://localhost/pizzaria";
+          Class.forName(myDriver);
+          this.conn = DriverManager.getConnection(myUrl, "root", "");
+        
+
+        
+      
+        }catch(Exception e){
+          System.err.println("Erro! ");
+          System.err.println(e.getMessage());
+        }
+    }
+    
+    public int AlterarFunc(){
+       int res = 0;        
+        String sql = "update loginfuncionario set senha = ?, tipo = ?, cpf = ?, idfunc = ?, nome = ?, endereco = ?, telefone = ?, email = ?";
+            try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+			preparedStatement.setString(1, this.senha);
+			preparedStatement.setInt(2, this.tipo);
+			preparedStatement.setString(3, this.cpf);
+			preparedStatement.setInt(4, this.idfunc);
+                        preparedStatement.setString(5, this.nome);
+                        preparedStatement.setString(6, this.endereco);
+                        preparedStatement.setInt(7, this.telefone);
+                        preparedStatement.setString(8, this.getEmail());
+			preparedStatement.execute();
+                        res = 1;
+                        preparedStatement.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+        
         
         return res;
     }
+    
+    public int CriarFunc(){
+        int res = 0;
+        String sql = "insert into loginfuncionario(senha,tipo,cpf,idfunc,nome,endereco,telefone,email)values(?,?,?,?,?,?,?,?)";
+        try(PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+			
+			preparedStatement.setString(1, this.senha);
+			preparedStatement.setInt(2, this.tipo);
+			preparedStatement.setString(3, this.cpf);
+			preparedStatement.setInt(4, this.idfunc);
+                        preparedStatement.setString(5, this.nome);
+                        preparedStatement.setString(6, this.endereco);
+                        preparedStatement.setInt(7, this.telefone);
+                        preparedStatement.setString(8, this.getEmail());
+			//executando comando sql
+			
+			preparedStatement.execute();
+                        res = 1;
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+        
+        
+        return res;
+    }
+    
     
     
     private int PesquisarPedido(){
