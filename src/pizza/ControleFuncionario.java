@@ -42,14 +42,14 @@ public class ControleFuncionario extends javax.swing.JFrame {
               rs.getInt("idfunc");
               cmb_ID.addItem(rs.getInt("idfunc")+"");
           }
-          
+                  st.close();
+
         }
         catch (Exception e)
         {
           System.err.println("Erro! ");
           System.err.println(e.getMessage());
         } 
-        
     }
 
     /**
@@ -62,7 +62,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private void initComponents() {
 
         btn_Criar = new javax.swing.JButton();
-        txt_Editar = new javax.swing.JButton();
+        txt_Novo = new javax.swing.JButton();
         txt_Nome = new javax.swing.JTextField();
         btn_Alterar = new javax.swing.JButton();
         txt_Tipo = new javax.swing.JTextField();
@@ -92,7 +92,12 @@ public class ControleFuncionario extends javax.swing.JFrame {
             }
         });
 
-        txt_Editar.setText("EDITAR");
+        txt_Novo.setText("NOVO");
+        txt_Novo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_NovoActionPerformed(evt);
+            }
+        });
 
         btn_Alterar.setText("ALTERAR");
         btn_Alterar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +107,11 @@ public class ControleFuncionario extends javax.swing.JFrame {
         });
 
         txt_Deletar.setText("DELETAR");
+        txt_Deletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_DeletarActionPerformed(evt);
+            }
+        });
 
         lbl_Titulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lbl_Titulo.setText("FUNCIONÁRIOS");
@@ -120,6 +130,16 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         lbl_ID.setText("ID:");
 
+        cmb_ID.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmb_IDItemStateChanged(evt);
+            }
+        });
+        cmb_ID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cmb_IDMouseClicked(evt);
+            }
+        });
         cmb_ID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmb_IDActionPerformed(evt);
@@ -137,7 +157,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_Editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_Novo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_Criar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -228,7 +248,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
                     .addComponent(btn_Alterar))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_Editar)
+                    .addComponent(txt_Novo)
                     .addComponent(txt_Deletar))
                 .addContainerGap())
         );
@@ -289,8 +309,100 @@ public class ControleFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_AlterarActionPerformed
 
     private void cmb_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_IDActionPerformed
-        // TODO add your handling code here:     
+        // TODO add your handling code here:
+
+        
     }//GEN-LAST:event_cmb_IDActionPerformed
+
+    private void txt_DeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_DeletarActionPerformed
+        // TODO add your handling code here:
+       Funcionario f = new Funcionario();
+       int ID = Integer.parseInt(cmb_ID.getSelectedItem().toString());
+       f.setIdfunc(ID);
+       
+       int res = f.ExcluirFunc();
+        if(res == 1){
+           showMessageDialog(null, "Excluido com sucesso!");
+       }
+    }//GEN-LAST:event_txt_DeletarActionPerformed
+
+    private void cmb_IDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmb_IDMouseClicked
+        // TODO add your handling code here:
+        cmb_ID.removeAllItems();
+        try
+        {
+          String myDriver = "org.gjt.mm.mysql.Driver";
+          String myUrl = "jdbc:mysql://localhost/pizzaria";
+          Class.forName(myDriver);
+          Connection conn = DriverManager.getConnection(myUrl, "root", "");
+          
+          String query = "SELECT * FROM loginfuncionario";
+          
+          Statement st = conn.createStatement();
+          
+          ResultSet rs = st.executeQuery(query);
+          
+          while(rs.next()){
+              rs.getInt("idfunc");
+              cmb_ID.addItem(rs.getInt("idfunc")+"");
+              
+          }
+          st.close();
+          
+        }
+        catch (Exception e)
+        {
+          System.err.println("Erro! ");
+          System.err.println(e.getMessage());
+        } 
+        
+    }//GEN-LAST:event_cmb_IDMouseClicked
+
+    private void cmb_IDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_IDItemStateChanged
+        // TODO add your handling code here:
+        try
+        {
+          String myDriver = "org.gjt.mm.mysql.Driver";
+          String myUrl = "jdbc:mysql://localhost/pizzaria";
+          Class.forName(myDriver);
+          Connection conn = DriverManager.getConnection(myUrl, "root", "");
+          
+          String query = "SELECT * FROM loginfuncionario WHERE idfunc ="+cmb_ID.getSelectedItem()+"";
+          
+          Statement st = conn.createStatement();
+          
+          ResultSet rs = st.executeQuery(query);
+          
+          rs.next();
+          
+          txt_Nome.setText(rs.getString("nome"));
+          txt_Endereco.setText(rs.getString("endereco"));
+          txt_Tel.setText(rs.getString("telefone"));
+          txt_Email.setText(rs.getString("email"));
+          txt_Tipo.setText(rs.getInt("tipo")+"");
+          txt_CPF.setText(rs.getString("cpf"));
+          
+          st.close();
+          
+        }
+        catch (Exception e)
+        {
+          System.err.println("Erro! ");
+          System.err.println(e.getMessage());
+        }
+        
+    }//GEN-LAST:event_cmb_IDItemStateChanged
+
+    private void txt_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_NovoActionPerformed
+        // TODO add your handling code here:
+          txt_Nome.setText("");
+          txt_Senha.setText("");
+          txt_Endereco.setText("");
+          txt_Tel.setText("");
+          txt_Email.setText("");
+          txt_Tipo.setText("");
+          txt_CPF.setText("");
+    }//GEN-LAST:event_txt_NovoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,10 +455,10 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private java.awt.Label lbl_Titulo;
     private javax.swing.JTextField txt_CPF;
     private javax.swing.JButton txt_Deletar;
-    private javax.swing.JButton txt_Editar;
     private javax.swing.JTextField txt_Email;
     private javax.swing.JTextField txt_Endereco;
     private javax.swing.JTextField txt_Nome;
+    private javax.swing.JButton txt_Novo;
     private javax.swing.JPasswordField txt_Senha;
     private javax.swing.JTextField txt_Tel;
     private javax.swing.JTextField txt_Tipo;
