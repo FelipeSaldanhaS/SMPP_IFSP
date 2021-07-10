@@ -25,14 +25,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-              <Component id="button1" min="-2" max="-2" attributes="0"/>
+              <Component id="btn_AbrirPedidos" min="-2" pref="83" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="button2" min="-2" pref="62" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+              <Component id="btn_Sair" min="-2" pref="83" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
-              <Component id="label1" min="-2" max="-2" attributes="0"/>
+              <Component id="lbl_Entrega" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="123" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -41,11 +41,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="label1" min="-2" max="-2" attributes="0"/>
+              <Component id="lbl_Entrega" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="button1" pref="43" max="32767" attributes="0"/>
-                  <Component id="button2" max="32767" attributes="0"/>
+                  <Component id="btn_AbrirPedidos" pref="43" max="32767" attributes="0"/>
+                  <Component id="btn_Sair" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="124" max="32767" attributes="0"/>
           </Group>
@@ -53,20 +53,23 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="java.awt.Button" name="button1">
+    <Component class="java.awt.Button" name="btn_AbrirPedidos">
       <Properties>
         <Property name="label" type="java.lang.String" value="Pedidos"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_AbrirPedidosActionPerformed"/>
       </Events>
     </Component>
-    <Component class="java.awt.Button" name="button2">
+    <Component class="java.awt.Button" name="btn_Sair">
       <Properties>
         <Property name="label" type="java.lang.String" value="Sair"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SairActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="java.awt.Label" name="label1">
+    <Component class="java.awt.Label" name="lbl_Entrega">
       <Properties>
         <Property name="alignment" type="int" value="1"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -75,9 +78,6 @@
         <Property name="name" type="java.lang.String" value="Menu Entregador" noResource="true"/>
         <Property name="text" type="java.lang.String" value="Menu Entregador"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Menu Entregador"/>
-      </AccessibilityProperties>
     </Component>
   </SubComponents>
 </Form>

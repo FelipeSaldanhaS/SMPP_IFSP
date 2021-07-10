@@ -25,14 +25,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-              <Component id="button1" min="-2" pref="75" max="-2" attributes="0"/>
-              <EmptySpace pref="108" max="32767" attributes="0"/>
-              <Component id="button2" min="-2" pref="67" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+              <Component id="btn_AbrirPedidos" min="-2" pref="83" max="-2" attributes="0"/>
+              <EmptySpace pref="100" max="32767" attributes="0"/>
+              <Component id="btn_Sair" min="-2" pref="83" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
-              <Component id="label1" min="-2" max="-2" attributes="0"/>
+              <Component id="lbl_Atende" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -41,11 +41,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Component id="label1" min="-2" max="-2" attributes="0"/>
+              <Component id="lbl_Atende" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="button1" pref="40" max="32767" attributes="0"/>
-                  <Component id="button2" max="32767" attributes="0"/>
+                  <Component id="btn_AbrirPedidos" pref="40" max="32767" attributes="0"/>
+                  <Component id="btn_Sair" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="127" max="32767" attributes="0"/>
           </Group>
@@ -53,7 +53,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="java.awt.Label" name="label1">
+    <Component class="java.awt.Label" name="lbl_Atende">
       <Properties>
         <Property name="alignment" type="int" value="1"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -63,15 +63,18 @@
         <Property name="text" type="java.lang.String" value="Menu Atendente"/>
       </Properties>
     </Component>
-    <Component class="java.awt.Button" name="button1">
+    <Component class="java.awt.Button" name="btn_AbrirPedidos">
       <Properties>
         <Property name="label" type="java.lang.String" value="Pedidos"/>
       </Properties>
     </Component>
-    <Component class="java.awt.Button" name="button2">
+    <Component class="java.awt.Button" name="btn_Sair">
       <Properties>
         <Property name="label" type="java.lang.String" value="Sair"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SairActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
