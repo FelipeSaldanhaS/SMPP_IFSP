@@ -1,5 +1,11 @@
 package pizza;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +23,33 @@ public class ControleFuncionario extends javax.swing.JFrame {
      */
     public ControleFuncionario() {
         initComponents();
+        
+        try
+        {
+          String myDriver = "org.gjt.mm.mysql.Driver";
+          String myUrl = "jdbc:mysql://localhost/pizzaria";
+          Class.forName(myDriver);
+          Connection conn = DriverManager.getConnection(myUrl, "root", "");
+          
+          String query = "SELECT idfunc FROM loginfuncionario";
+          
+          Statement st = conn.createStatement();
+          
+          ResultSet rs = st.executeQuery(query);
+          
+          cmb_ID.removeAllItems();
+          while(rs.next()){
+              rs.getInt("idfunc");
+              cmb_ID.addItem(rs.getInt("idfunc")+"");
+          }
+          
+        }
+        catch (Exception e)
+        {
+          System.err.println("Erro! ");
+          System.err.println(e.getMessage());
+        } 
+        
     }
 
     /**
@@ -62,6 +95,11 @@ public class ControleFuncionario extends javax.swing.JFrame {
         txt_Editar.setText("EDITAR");
 
         btn_Alterar.setText("ALTERAR");
+        btn_Alterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AlterarActionPerformed(evt);
+            }
+        });
 
         txt_Deletar.setText("DELETAR");
 
@@ -82,7 +120,11 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         lbl_ID.setText("ID:");
 
-        cmb_ID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmb_ID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_IDActionPerformed(evt);
+            }
+        });
 
         lbl_Senha.setText("Senha:");
 
@@ -212,7 +254,43 @@ public class ControleFuncionario extends javax.swing.JFrame {
        f.setCpf(CPF);
        f.setEmail(Email);
        int res = f.CriarFunc();
+       
+       if(res == 1){
+           showMessageDialog(null, "Inserido com sucesso!");
+       }
     }//GEN-LAST:event_btn_CriarActionPerformed
+
+    private void btn_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AlterarActionPerformed
+        // TODO add your handling code here:
+       Funcionario f = new Funcionario();
+       int ID = Integer.parseInt(cmb_ID.getSelectedItem().toString());
+       String Senha = new String((txt_Senha.getPassword()));
+       String Nome = txt_Nome.getText();
+       int Tipo = Integer.parseInt(txt_Tipo.getText());
+       String Endereco = txt_Endereco.getText();
+       String Telefone = txt_Tel.getText();
+       String CPF = txt_CPF.getText();
+       String Email = txt_Email.getText();
+       
+       f.setIdfunc(ID);
+       f.setSenha(Senha);
+       f.setNome(Nome);
+       f.setTipo(Tipo);
+       f.setEndereco(Endereco);
+       f.setTelefone(Telefone);
+       f.setCpf(CPF);
+       f.setEmail(Email);
+       
+       int res = f.AlterarFunc();
+       
+       if(res == 1){
+           showMessageDialog(null, "Alterado com sucesso!");
+       }
+    }//GEN-LAST:event_btn_AlterarActionPerformed
+
+    private void cmb_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_IDActionPerformed
+        // TODO add your handling code here:     
+    }//GEN-LAST:event_cmb_IDActionPerformed
 
     /**
      * @param args the command line arguments
