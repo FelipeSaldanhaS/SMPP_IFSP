@@ -31,14 +31,16 @@ public class MenuAtendente extends javax.swing.JFrame {
         lbl_Atende = new java.awt.Label();
         btn_AbrirPedidos = new java.awt.Button();
         btn_Sair = new java.awt.Button();
+        btn_AbrirFunc = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lbl_Atende.setAlignment(java.awt.Label.CENTER);
-        lbl_Atende.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lbl_Atende.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lbl_Atende.setName("Menu Atendente"); // NOI18N
         lbl_Atende.setText("Menu Atendente");
 
+        btn_AbrirPedidos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btn_AbrirPedidos.setLabel("Pedidos");
         btn_AbrirPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -46,10 +48,19 @@ public class MenuAtendente extends javax.swing.JFrame {
             }
         });
 
+        btn_Sair.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btn_Sair.setLabel("Sair");
         btn_Sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_SairActionPerformed(evt);
+            }
+        });
+
+        btn_AbrirFunc.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btn_AbrirFunc.setLabel("Alterar dados desse Login");
+        btn_AbrirFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AbrirFuncActionPerformed(evt);
             }
         });
 
@@ -58,26 +69,30 @@ public class MenuAtendente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(btn_AbrirPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                .addComponent(btn_Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(lbl_Atende, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_AbrirFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_AbrirPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(lbl_Atende, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(31, 31, 31)
                 .addComponent(lbl_Atende, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_AbrirPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(btn_Sair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_AbrirPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_AbrirFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -95,6 +110,13 @@ public class MenuAtendente extends javax.swing.JFrame {
         new ControlePedidos().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_AbrirPedidosActionPerformed
+
+    private void btn_AbrirFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AbrirFuncActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ControleFuncionario().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_AbrirFuncActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,6 +155,7 @@ public class MenuAtendente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Button btn_AbrirFunc;
     private java.awt.Button btn_AbrirPedidos;
     private java.awt.Button btn_Sair;
     private java.awt.Label lbl_Atende;

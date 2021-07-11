@@ -17,16 +17,17 @@ import java.math.*;
  * @author fefes
  */
 public class Login {
-    private int idfunc;
-    private String senha;
+    static int idfunc;
+    static int tipoFunc;
     public Connection conn;
-    Login(){
- 
+    
+     Login(){
+        
     }
     
     public int FazerLogin(int id, String senhaM){
         int res = 0;
-        
+        idfunc = id;
         try
         {
           String myDriver = "org.gjt.mm.mysql.Driver";
@@ -41,7 +42,6 @@ public class Login {
         
         String senhaMD5 = new BigInteger(1,m.digest()).toString(16);
         
-        //System.out.print("Senha: "+senhaMD5);
         String query = "SELECT * FROM loginfuncionario WHERE idfunc = "+id+"";
         
         Statement st = conn.createStatement();
@@ -50,9 +50,9 @@ public class Login {
         
         rs.next();
         
-        //System.out.print("\nID-BD:"+rs.getInt("idfunc")+"\n SenhaBD: "+rs.getString("senha"));
         
         if((rs.getInt("idfunc") == id) &&(rs.getString("senha").equals(senhaMD5))){
+            tipoFunc = rs.getInt("tipo");
             if(rs.getInt("tipo") == 1){
                 res = 1;
             }
@@ -64,7 +64,7 @@ public class Login {
             }
             else{
                 res = 0;
-                System.out.print("Oh no");
+                System.out.print("Erro, tipo invalido para esse sistema!");
             }
         }
         rs.close();

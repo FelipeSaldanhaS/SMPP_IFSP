@@ -67,7 +67,7 @@ public class Cardapio {
     
     public int IncluirItemCardapio(){
          int res = 0;        
-        String sql = "insert into pedidos (preco, sabor)values(?,?)";
+        String sql = "insert into cardapio (preco, sabor)values(?,?)";
             try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
 
                         preparedStatement.setDouble(1, this.preco);
@@ -100,11 +100,12 @@ public class Cardapio {
     
     public int AlterarItemCardapio(){
         int res = 0;        
-        String sql = "update cardapio set idsabor = ?, preco = ?, sabor = ?";
+        String sql = "update cardapio set  preco = ?, sabor = ? WHERE idsabor = ?";
             try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
-			preparedStatement.setInt(1, this.idsabor);
-			preparedStatement.setDouble(2, this.preco);
-			preparedStatement.setString(3, this.sabor);
+
+			preparedStatement.setDouble(1, this.preco);
+			preparedStatement.setString(2, this.sabor);
+                        preparedStatement.setInt(3, this.idsabor);
 			                        
 			preparedStatement.execute();
                         res = 1;

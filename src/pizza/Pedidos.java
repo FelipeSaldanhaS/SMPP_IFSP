@@ -15,6 +15,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
 
 /**
  *
@@ -22,6 +26,22 @@ import java.util.List;
  */
 public class Pedidos {
 
+    public String getHora_inicial() {
+        return hora_inicial;
+    }
+
+    public void setHora_inicial(String hora_inicial) {
+        this.hora_inicial = hora_inicial;
+    }
+    
+    public String getHora_final() {
+        return hora_final;
+    }
+
+    public void setHora_final(String hora_final) {
+        this.hora_final = hora_final;
+    }
+    
     /**
      * @return the idpedido
      */
@@ -176,33 +196,8 @@ public class Pedidos {
         this.nota_fiscal = nota_fiscal;
     }
 
-    /**
-     * @return the hora_inicial
-     */
-    public String getHora_inicial() {
-        return hora_inicial;
-    }
 
-    /**
-     * @param hora_inicial the hora_inicial to set
-     */
-    public void setHora_inicial(String hora_inicial) {
-        this.hora_inicial = hora_inicial;
-    }
-
-    /**
-     * @return the hora_final
-     */
-    public String getHora_final() {
-        return hora_final;
-    }
-
-    /**
-     * @param hora_final the hora_final to set
-     */
-    public void setHora_final(String hora_final) {
-        this.hora_final = hora_final;
-    }
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     private int idpedido, id_sabor, id_func;
     private double preco;
     private String observacao, telefone, nome_cliente, statusped, placa, endereco, nota_fiscal;
@@ -234,8 +229,8 @@ public class Pedidos {
                         preparedStatement.setString(5, this.observacao);
                         preparedStatement.setString(6, this.telefone);
                         preparedStatement.setString(7, this.nome_cliente);
-                        preparedStatement.setString(8, this.hora_inicial);
-                        preparedStatement.setString(9, this.hora_final);
+                        //preparedStatement.setTimesStamp(8, );
+                        //preparedStatement.setString(9, this.getHora_final());
                         preparedStatement.setString(10, this.nota_fiscal);
                         preparedStatement.setString(11, this.statusped);
                         preparedStatement.setString(12, this.placa);
@@ -262,8 +257,8 @@ public class Pedidos {
                         preparedStatement.setString(5, this.observacao);
                         preparedStatement.setString(6, this.telefone);
                         preparedStatement.setString(7, this.nome_cliente);
-                        preparedStatement.setString(8, this.hora_inicial);
-                        preparedStatement.setString(9, this.hora_final);
+                        preparedStatement.setString(8, this.getHora_inicial());
+                        preparedStatement.setString(9, this.getHora_final());
                         preparedStatement.setString(10, this.nota_fiscal);
                         preparedStatement.setString(11, this.statusped);
                         preparedStatement.setString(12, this.placa);

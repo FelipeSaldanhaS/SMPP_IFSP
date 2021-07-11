@@ -88,7 +88,7 @@ public class Funcionario {
     
     private int idfunc, tipo;
     private String cpf, nome, endereco, email, senha, telefone;
-    private Connection conn;
+    static Connection conn;
     
     Funcionario() {
         try{
@@ -108,17 +108,16 @@ public class Funcionario {
     
     public int AlterarFunc(){
        int res = 0;        
-        String sql = "update loginfuncionario set senha = MD5(?), tipo = ?, cpf = ?, idfunc = ?, nome = ?, endereco = ?, telefone = ?, email = ? WHERE idfunc = ?";
+        String sql = "update loginfuncionario set senha = MD5(?), cpf = ?, idfunc = ?, nome = ?, endereco = ?, telefone = ?, email = ? WHERE idfunc = ?";
             try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
 			preparedStatement.setString(1, this.senha);
-			preparedStatement.setInt(2, this.tipo);
-			preparedStatement.setString(3, this.cpf);
-			preparedStatement.setInt(4, this.idfunc);
-                        preparedStatement.setString(5, this.nome);
-                        preparedStatement.setString(6, this.endereco);
-                        preparedStatement.setString(7, this.telefone);
-                        preparedStatement.setString(8, this.getEmail());
-                        preparedStatement.setInt(9, this.idfunc);
+			preparedStatement.setString(2, this.cpf);
+			preparedStatement.setInt(3, this.idfunc);
+                        preparedStatement.setString(4, this.nome);
+                        preparedStatement.setString(5, this.endereco);
+                        preparedStatement.setString(6, this.telefone);
+                        preparedStatement.setString(7, this.getEmail());
+                        preparedStatement.setInt(8, this.idfunc);
 			preparedStatement.execute();
                         res = 1;
                         preparedStatement.close();

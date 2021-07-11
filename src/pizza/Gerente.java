@@ -5,46 +5,44 @@
  */
 package pizza;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author fefes
  */
 public class Gerente extends Funcionario {
-    
     @Override
     public int AlterarFunc(){
-        int res = 0;
+       int res = 0;        
+        String sql = "update loginfuncionario set senha = MD5(?), tipo = ?, cpf = ?, idfunc = ?, nome = ?, endereco = ?, telefone = ?, email = ? WHERE idfunc = ?";
+            try(PreparedStatement preparedStatement = Funcionario.conn.prepareStatement(sql)){
+			preparedStatement.setString(1, getSenha());
+			preparedStatement.setInt(2, getTipo());
+			preparedStatement.setString(3, getCpf());
+			preparedStatement.setInt(4, getIdfunc());
+                        preparedStatement.setString(5, getNome());
+                        preparedStatement.setString(6, getEndereco());
+                        preparedStatement.setString(7, getTelefone());
+                        preparedStatement.setString(8, getEmail());
+                        preparedStatement.setInt(9, getIdfunc());
+			preparedStatement.execute();
+                        res = 1;
+                        preparedStatement.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+        
+        
         return res;
-    }
-    
-    private int IncluirFunc(){
-       int res = 0;
-       return res; 
-    }
-    
-    private int DeletarFunc(){
-       int res = 0;
-       return res; 
-    }
-    
-    private int PesquisarFunc(){
-       int res = 0;
-       return res; 
-    }
-    
-    private int IncluirPedido(){
-       int res = 0;
-       return res; 
-    }
-    
-    private int AlterarPedido(){
-       int res = 0;
-       return res; 
-    }
-    
-    private int DeletarPedido(){
-       int res = 0;
-       return res; 
-    }
-    
+    }    
 }
