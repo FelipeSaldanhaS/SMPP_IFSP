@@ -34,11 +34,10 @@ public class ControlePedidos extends javax.swing.JFrame {
           Class.forName(myDriver);
           Connection conn = DriverManager.getConnection(myUrl, "root", "");
           String query = "";
-          if(Login.idfunc != 3){
-             query = "SELECT idpedido FROM pedidos";
-          }
-          else{
-             query = "SELECT idpedido FROM pedidos where id_func="+Login.idfunc+"";  
+          
+          query = "SELECT idpedido FROM pedidos";
+          if(Login.idfunc == 3){
+              query = "SELECT idpedido FROM pedidos where id_func="+Login.idfunc+"";  
           }
           Statement st = conn.createStatement();
           
@@ -49,6 +48,7 @@ public class ControlePedidos extends javax.swing.JFrame {
           while(rs.next()){
               cmb_IDPedido.addItem(rs.getInt("idpedido")+"");
           }
+          cmb_IDPedido.setSelectedItem(Login.idfunc+"");
           st.close();
           //----------
         }

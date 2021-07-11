@@ -22,7 +22,7 @@ public class Entregador extends Pedidos{
                         preparedStatement.setString(1, getStatusped());
                         preparedStatement.setInt(2, getIdpedido());
 			preparedStatement.execute();
-                        res = 1;
+                        res = AlterarAposPed();
                         preparedStatement.close();
 		}catch(SQLException e){
 			e.printStackTrace();

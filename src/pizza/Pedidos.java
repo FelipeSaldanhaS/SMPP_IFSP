@@ -256,7 +256,7 @@ public class Pedidos {
         return res;
     }
    
-    private int AlterarAposPed(){
+    public int AlterarAposPed(){
         int res = 0;
        String sql = "Update entregador_func SET id_pedido_atual = ? WHERE id_entregador = ?";
        try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
