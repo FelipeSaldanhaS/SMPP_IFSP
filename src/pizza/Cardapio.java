@@ -66,17 +66,54 @@ public class Cardapio {
     }
     
     public int IncluirItemCardapio(){
-        int res = 0;
+         int res = 0;        
+        String sql = "insert into pedidos (preco, sabor)values(?,?)";
+            try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+
+                        preparedStatement.setDouble(1, this.preco);
+			preparedStatement.setString(2, this.sabor);
+			                        
+			preparedStatement.execute();
+                        res = 1;
+                        preparedStatement.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+        
+        
         return res;
     }
     
     public int ExcluirItemCardapio(){
-        int res = 0;
+         int res = 0;
+        String sql = "delete from cardapio where idsabor = ?";
+        try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+            preparedStatement.setInt(1, this.idsabor);
+            preparedStatement.execute();
+            res = 1;
+            preparedStatement.close();
+        }catch (SQLException e) {
+		e.printStackTrace();
+	}
         return res;
     }
     
     public int AlterarItemCardapio(){
-        int res = 0;
+        int res = 0;        
+        String sql = "update cardapio set idsabor = ?, preco = ?, sabor = ?";
+            try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+			preparedStatement.setInt(1, this.idsabor);
+			preparedStatement.setDouble(2, this.preco);
+			preparedStatement.setString(3, this.sabor);
+			                        
+			preparedStatement.execute();
+                        res = 1;
+                        preparedStatement.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+        
+        
         return res;
     }
     
