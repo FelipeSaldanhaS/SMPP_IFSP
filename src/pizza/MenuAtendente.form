@@ -67,6 +67,9 @@
       <Properties>
         <Property name="label" type="java.lang.String" value="Pedidos"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_AbrirPedidosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="java.awt.Button" name="btn_Sair">
       <Properties>

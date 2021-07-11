@@ -85,6 +85,9 @@ public class MenuEntregador extends javax.swing.JFrame {
 
     private void btn_AbrirPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AbrirPedidosActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new ControlePedidos().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_AbrirPedidosActionPerformed
 
     private void btn_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SairActionPerformed

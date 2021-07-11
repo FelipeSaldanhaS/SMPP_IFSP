@@ -40,6 +40,11 @@ public class MenuAtendente extends javax.swing.JFrame {
         lbl_Atende.setText("Menu Atendente");
 
         btn_AbrirPedidos.setLabel("Pedidos");
+        btn_AbrirPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AbrirPedidosActionPerformed(evt);
+            }
+        });
 
         btn_Sair.setLabel("Sair");
         btn_Sair.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +88,13 @@ public class MenuAtendente extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_btn_SairActionPerformed
+
+    private void btn_AbrirPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AbrirPedidosActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ControlePedidos().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_AbrirPedidosActionPerformed
 
     /**
      * @param args the command line arguments
