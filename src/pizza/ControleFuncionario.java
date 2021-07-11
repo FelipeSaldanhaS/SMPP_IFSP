@@ -24,6 +24,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
     public ControleFuncionario() {
         initComponents();
         
+
+        
         try
         {
           String myDriver = "org.gjt.mm.mysql.Driver";
@@ -39,7 +41,6 @@ public class ControleFuncionario extends javax.swing.JFrame {
           
           cmb_ID.removeAllItems();
           while(rs.next()){
-              rs.getInt("idfunc");
               cmb_ID.addItem(rs.getInt("idfunc")+"");
           }
                   st.close();
@@ -49,7 +50,17 @@ public class ControleFuncionario extends javax.swing.JFrame {
         {
           System.err.println("Erro! ");
           System.err.println(e.getMessage());
-        } 
+        }
+        if(Login.tipoFunc == 1){
+            
+        }else{
+            txt_Tipo.setEditable(false);
+            cmb_ID.setSelectedItem(Login.idfunc+"");
+            cmb_ID.setEnabled(false);
+            btn_Criar.setEnabled(false);
+            btn_Deletar.setEnabled(false);
+            System.out.print("O ID do func: "+Login.idfunc);
+        }
     }
 
     /**
@@ -62,11 +73,11 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private void initComponents() {
 
         btn_Criar = new javax.swing.JButton();
-        txt_Novo = new javax.swing.JButton();
+        btn_Novo = new javax.swing.JButton();
         txt_Nome = new javax.swing.JTextField();
         btn_Alterar = new javax.swing.JButton();
         txt_Tipo = new javax.swing.JTextField();
-        txt_Deletar = new javax.swing.JButton();
+        btn_Deletar = new javax.swing.JButton();
         txt_Tel = new javax.swing.JTextField();
         txt_Email = new javax.swing.JTextField();
         txt_Endereco = new javax.swing.JTextField();
@@ -82,6 +93,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
         cmb_ID = new javax.swing.JComboBox<>();
         lbl_Senha = new javax.swing.JLabel();
         txt_Senha = new javax.swing.JPasswordField();
+        btn_Voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,10 +104,10 @@ public class ControleFuncionario extends javax.swing.JFrame {
             }
         });
 
-        txt_Novo.setText("NOVO");
-        txt_Novo.addActionListener(new java.awt.event.ActionListener() {
+        btn_Novo.setText("NOVO");
+        btn_Novo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_NovoActionPerformed(evt);
+                btn_NovoActionPerformed(evt);
             }
         });
 
@@ -106,10 +118,10 @@ public class ControleFuncionario extends javax.swing.JFrame {
             }
         });
 
-        txt_Deletar.setText("DELETAR");
-        txt_Deletar.addActionListener(new java.awt.event.ActionListener() {
+        btn_Deletar.setText("DELETAR");
+        btn_Deletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_DeletarActionPerformed(evt);
+                btn_DeletarActionPerformed(evt);
             }
         });
 
@@ -148,6 +160,14 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
         lbl_Senha.setText("Senha:");
 
+        btn_Voltar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btn_Voltar.setText("<- Voltar");
+        btn_Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,12 +177,12 @@ public class ControleFuncionario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_Novo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_Novo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_Criar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_Alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_Deletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btn_Deletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -191,13 +211,15 @@ public class ControleFuncionario extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lbl_Endereco)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_Endereco, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
+                                        .addComponent(txt_Endereco))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lbl_Tipo)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txt_Tipo))))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(106, Short.MAX_VALUE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_Voltar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lbl_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24)
                                 .addComponent(lbl_ID)))
@@ -213,7 +235,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
                     .addComponent(lbl_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lbl_ID)
-                        .addComponent(cmb_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmb_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_Voltar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_Nome)
@@ -248,8 +271,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
                     .addComponent(btn_Alterar))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_Novo)
-                    .addComponent(txt_Deletar))
+                    .addComponent(btn_Novo)
+                    .addComponent(btn_Deletar))
                 .addContainerGap())
         );
 
@@ -282,29 +305,56 @@ public class ControleFuncionario extends javax.swing.JFrame {
 
     private void btn_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AlterarActionPerformed
         // TODO add your handling code here:
-       Funcionario f = new Funcionario();
-       int ID = Integer.parseInt(cmb_ID.getSelectedItem().toString());
-       String Senha = new String((txt_Senha.getPassword()));
-       String Nome = txt_Nome.getText();
-       int Tipo = Integer.parseInt(txt_Tipo.getText());
-       String Endereco = txt_Endereco.getText();
-       String Telefone = txt_Tel.getText();
-       String CPF = txt_CPF.getText();
-       String Email = txt_Email.getText();
-       
-       f.setIdfunc(ID);
-       f.setSenha(Senha);
-       f.setNome(Nome);
-       f.setTipo(Tipo);
-       f.setEndereco(Endereco);
-       f.setTelefone(Telefone);
-       f.setCpf(CPF);
-       f.setEmail(Email);
-       
-       int res = f.AlterarFunc();
-       
-       if(res == 1){
-           showMessageDialog(null, "Alterado com sucesso!");
+       if(Login.tipoFunc != 1){
+        Funcionario f = new Funcionario();
+        int ID = Integer.parseInt(cmb_ID.getSelectedItem().toString());
+        String Senha = new String((txt_Senha.getPassword()));
+        String Nome = txt_Nome.getText();
+        int Tipo = Integer.parseInt(txt_Tipo.getText());
+        String Endereco = txt_Endereco.getText();
+        String Telefone = txt_Tel.getText();
+        String CPF = txt_CPF.getText();
+        String Email = txt_Email.getText();
+
+        f.setIdfunc(ID);
+        f.setSenha(Senha);
+        f.setNome(Nome);
+        f.setTipo(Tipo);
+        f.setEndereco(Endereco);
+        f.setTelefone(Telefone);
+        f.setCpf(CPF);
+        f.setEmail(Email);
+
+        int res = f.AlterarFunc();
+
+        if(res == 1){
+            showMessageDialog(null, "Alterado com sucesso!");
+        }
+       } else{
+        Gerente f = new Gerente();
+        int ID = Integer.parseInt(cmb_ID.getSelectedItem().toString());
+        String Senha = new String((txt_Senha.getPassword()));
+        String Nome = txt_Nome.getText();
+        int Tipo = Integer.parseInt(txt_Tipo.getText());
+        String Endereco = txt_Endereco.getText();
+        String Telefone = txt_Tel.getText();
+        String CPF = txt_CPF.getText();
+        String Email = txt_Email.getText();
+
+        f.setIdfunc(ID);
+        f.setSenha(Senha);
+        f.setNome(Nome);
+        f.setTipo(Tipo);
+        f.setEndereco(Endereco);
+        f.setTelefone(Telefone);
+        f.setCpf(CPF);
+        f.setEmail(Email);
+
+        int res = f.AlterarFunc();
+
+        if(res == 1){
+            showMessageDialog(null, "Alterado com sucesso!");
+        }  
        }
     }//GEN-LAST:event_btn_AlterarActionPerformed
 
@@ -314,7 +364,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cmb_IDActionPerformed
 
-    private void txt_DeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_DeletarActionPerformed
+    private void btn_DeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DeletarActionPerformed
         // TODO add your handling code here:
        Funcionario f = new Funcionario();
        int ID = Integer.parseInt(cmb_ID.getSelectedItem().toString());
@@ -324,10 +374,11 @@ public class ControleFuncionario extends javax.swing.JFrame {
         if(res == 1){
            showMessageDialog(null, "Excluido com sucesso!");
        }
-    }//GEN-LAST:event_txt_DeletarActionPerformed
+    }//GEN-LAST:event_btn_DeletarActionPerformed
 
     private void cmb_IDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmb_IDMouseClicked
         // TODO add your handling code here:
+        if(Login.tipoFunc == 1){
         cmb_ID.removeAllItems();
         try
         {
@@ -352,10 +403,10 @@ public class ControleFuncionario extends javax.swing.JFrame {
         }
         catch (Exception e)
         {
-          System.err.println("Erro! ");
+          System.err.println("Erro no mouse click! ");
           System.err.println(e.getMessage());
         } 
-        
+        }
     }//GEN-LAST:event_cmb_IDMouseClicked
 
     private void cmb_IDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_IDItemStateChanged
@@ -387,13 +438,13 @@ public class ControleFuncionario extends javax.swing.JFrame {
         }
         catch (Exception e)
         {
-          System.err.println("Erro! ");
+          System.err.println("Erro no itemchanged! ");
           System.err.println(e.getMessage());
         }
         
     }//GEN-LAST:event_cmb_IDItemStateChanged
 
-    private void txt_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_NovoActionPerformed
+    private void btn_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NovoActionPerformed
         // TODO add your handling code here:
           txt_Nome.setText("");
           txt_Senha.setText("");
@@ -402,7 +453,25 @@ public class ControleFuncionario extends javax.swing.JFrame {
           txt_Email.setText("");
           txt_Tipo.setText("");
           txt_CPF.setText("");
-    }//GEN-LAST:event_txt_NovoActionPerformed
+    }//GEN-LAST:event_btn_NovoActionPerformed
+
+    private void btn_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VoltarActionPerformed
+        // TODO add your handling code here:
+        if(Login.tipoFunc == 1){
+            this.setVisible(false);
+            new MenuGerente().setVisible(true);
+            this.dispose();
+        }
+        else if (Login.tipoFunc == 2){
+            this.setVisible(false);
+            new MenuAtendente().setVisible(true);
+            this.dispose();
+        }else{
+            this.setVisible(false);
+            new MenuEntregador().setVisible(true);
+            this.dispose(); 
+        }
+    }//GEN-LAST:event_btn_VoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -443,6 +512,9 @@ public class ControleFuncionario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Alterar;
     private javax.swing.JButton btn_Criar;
+    private javax.swing.JButton btn_Deletar;
+    private javax.swing.JButton btn_Novo;
+    private javax.swing.JButton btn_Voltar;
     private javax.swing.JComboBox<String> cmb_ID;
     private javax.swing.JLabel lbl_CPF;
     private javax.swing.JLabel lbl_Email;
@@ -454,11 +526,9 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Tipo;
     private java.awt.Label lbl_Titulo;
     private javax.swing.JTextField txt_CPF;
-    private javax.swing.JButton txt_Deletar;
     private javax.swing.JTextField txt_Email;
     private javax.swing.JTextField txt_Endereco;
     private javax.swing.JTextField txt_Nome;
-    private javax.swing.JButton txt_Novo;
     private javax.swing.JPasswordField txt_Senha;
     private javax.swing.JTextField txt_Tel;
     private javax.swing.JTextField txt_Tipo;

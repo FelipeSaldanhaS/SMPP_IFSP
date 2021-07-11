@@ -5,6 +5,12 @@
  */
 package pizza;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 /**
  *
  * @author fefes
@@ -16,6 +22,32 @@ public class ControleCardapio extends javax.swing.JFrame {
      */
     public ControleCardapio() {
         initComponents();
+        
+        try
+        {
+          String myDriver = "org.gjt.mm.mysql.Driver";
+          String myUrl = "jdbc:mysql://localhost/pizzaria";
+          Class.forName(myDriver);
+          Connection conn = DriverManager.getConnection(myUrl, "root", "");
+          
+          String query = "SELECT idsabor FROM cardapio";
+          
+          Statement st = conn.createStatement();
+          
+          ResultSet rs = st.executeQuery(query);
+          
+          cmb_IDSabor.removeAllItems();
+          while(rs.next()){
+              cmb_IDSabor.addItem(rs.getInt("idsabor")+"");
+          }
+                  st.close();
+
+        }
+        catch (Exception e)
+        {
+          System.err.println("Erro! ");
+          System.err.println(e.getMessage());
+        }
     }
 
     /**
@@ -38,6 +70,7 @@ public class ControleCardapio extends javax.swing.JFrame {
         btn_Criar = new javax.swing.JButton();
         txt_Novo = new javax.swing.JButton();
         btn_Alterar = new javax.swing.JButton();
+        btn_Voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +78,17 @@ public class ControleCardapio extends javax.swing.JFrame {
         lbl_Titulo.setText("CARDÁPIO");
 
         lbl_IDSABOR.setText("IDSabor:");
+
+        cmb_IDSabor.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmb_IDSaborItemStateChanged(evt);
+            }
+        });
+        cmb_IDSabor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cmb_IDSaborMouseClicked(evt);
+            }
+        });
 
         lbl_Sabor.setText("Sabor:");
 
@@ -78,10 +122,28 @@ public class ControleCardapio extends javax.swing.JFrame {
             }
         });
 
+        btn_Voltar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btn_Voltar.setText("<- Voltar");
+        btn_Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt_Novo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Criar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_Alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txt_Deletar))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -99,27 +161,20 @@ public class ControleCardapio extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txt_Preco)
                         .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbl_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(151, 151, 151))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_Novo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_Criar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_Alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_Deletar))
-                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btn_Voltar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(151, 151, 151))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Voltar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_IDSABOR)
@@ -132,7 +187,7 @@ public class ControleCardapio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_Preco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_Preco))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Criar)
                     .addComponent(btn_Alterar))
@@ -147,21 +202,132 @@ public class ControleCardapio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_DeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_DeletarActionPerformed
-
+        Cardapio c = new Cardapio();
+        int IDSabor = Integer.parseInt(cmb_IDSabor.getSelectedItem().toString());
+        
+        c.setIdsabor(IDSabor);
+        
+        int res = c.ExcluirItemCardapio();
+        if(res == 1){
+           showMessageDialog(null, "Excluido com sucesso!");
+       }
+        
     }//GEN-LAST:event_txt_DeletarActionPerformed
 
     private void btn_CriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CriarActionPerformed
-
+       Cardapio c = new Cardapio();
+       String Sabor = txt_Sabor.getText();
+       double Preco = Double.parseDouble(txt_Preco.getText());
+       
+       c.setSabor(Sabor);
+       c.setPreco(Preco);
+       int res = c.IncluirItemCardapio();
+       
+       if(res == 1){
+           showMessageDialog(null, "Inserido com sucesso!");
+       }
     }//GEN-LAST:event_btn_CriarActionPerformed
 
     private void txt_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_NovoActionPerformed
         // TODO add your handling code here:
+          txt_Sabor.setText("");
+          txt_Preco.setText("");
 
     }//GEN-LAST:event_txt_NovoActionPerformed
 
     private void btn_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AlterarActionPerformed
-
+       Cardapio c = new Cardapio();
+       int IDSabor = Integer.parseInt(cmb_IDSabor.getSelectedItem().toString());
+       String Sabor = txt_Sabor.getText();
+       double Preco = Double.parseDouble(txt_Preco.getText());
+       
+       c.setIdsabor(IDSabor);
+       c.setSabor(Sabor);
+       c.setPreco(Preco);
+       int res = c.AlterarItemCardapio();
+       
+       if(res == 1){
+           showMessageDialog(null, "Alterado com sucesso!");
+       }
     }//GEN-LAST:event_btn_AlterarActionPerformed
+
+    private void cmb_IDSaborMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmb_IDSaborMouseClicked
+        // TODO add your handling code here:
+        cmb_IDSabor.removeAllItems();
+        try
+        {
+          String myDriver = "org.gjt.mm.mysql.Driver";
+          String myUrl = "jdbc:mysql://localhost/pizzaria";
+          Class.forName(myDriver);
+          Connection conn = DriverManager.getConnection(myUrl, "root", "");
+          
+          String query = "SELECT idsabor FROM cardapio";
+          
+          Statement st = conn.createStatement();
+          
+          ResultSet rs = st.executeQuery(query);
+          
+          
+          while(rs.next()){
+              cmb_IDSabor.addItem(rs.getInt("idsabor")+"");
+          }
+                  st.close();
+
+        }
+        catch (Exception e)
+        {
+          System.err.println("Erro! ");
+          System.err.println(e.getMessage());
+        }
+    }//GEN-LAST:event_cmb_IDSaborMouseClicked
+
+    private void cmb_IDSaborItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_IDSaborItemStateChanged
+        // TODO add your handling code here:
+        try
+        {
+          String myDriver = "org.gjt.mm.mysql.Driver";
+          String myUrl = "jdbc:mysql://localhost/pizzaria";
+          Class.forName(myDriver);
+          Connection conn = DriverManager.getConnection(myUrl, "root", "");
+          
+          String query = "SELECT * FROM cardapio WHERE idsabor ="+cmb_IDSabor.getSelectedItem()+"";
+          
+          Statement st = conn.createStatement();
+          
+          ResultSet rs = st.executeQuery(query);
+          
+          rs.next();
+          
+          txt_Sabor.setText(rs.getString("sabor"));
+          txt_Preco.setText(rs.getString("preco"));
+          
+          st.close();
+          
+        }
+        catch (Exception e)
+        {
+          System.err.println("Erro! ");
+          System.err.println(e.getMessage());
+        }
+    }//GEN-LAST:event_cmb_IDSaborItemStateChanged
+
+    private void btn_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VoltarActionPerformed
+        // TODO add your handling code here:
+        if(Login.tipoFunc == 1){
+            this.setVisible(false);
+            new MenuGerente().setVisible(true);
+            this.dispose();
+        }
+        else if (Login.tipoFunc == 2){
+            this.setVisible(false);
+            new MenuAtendente().setVisible(true);
+            this.dispose();
+        }else{
+            this.setVisible(false);
+            new MenuEntregador().setVisible(true);
+            this.dispose(); 
+        }
+    }//GEN-LAST:event_btn_VoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,6 +367,7 @@ public class ControleCardapio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Alterar;
     private javax.swing.JButton btn_Criar;
+    private javax.swing.JButton btn_Voltar;
     private javax.swing.JComboBox<String> cmb_IDSabor;
     private javax.swing.JLabel lbl_IDSABOR;
     private javax.swing.JLabel lbl_Preco;

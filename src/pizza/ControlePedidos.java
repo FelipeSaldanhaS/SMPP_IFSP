@@ -59,6 +59,7 @@ public class ControlePedidos extends javax.swing.JFrame {
         cmb_IDPedido = new javax.swing.JComboBox<>();
         cmb_IDSabor = new javax.swing.JComboBox<>();
         txt_Status = new javax.swing.JTextField();
+        btn_Voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,14 +111,18 @@ public class ControlePedidos extends javax.swing.JFrame {
 
         btn_Deletar.setText("DELETAR");
 
+        btn_Voltar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btn_Voltar.setText("<- Voltar");
+        btn_Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(171, Short.MAX_VALUE)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(155, 155, 155))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -190,12 +195,20 @@ public class ControlePedidos extends javax.swing.JFrame {
                             .addComponent(txt_Preco, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(txt_Nota))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(btn_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Voltar))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_Ped)
@@ -241,9 +254,9 @@ public class ControlePedidos extends javax.swing.JFrame {
                     .addComponent(lbl_HF)
                     .addComponent(txt_HoraF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_Criar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_Alterar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_Alterar)
+                    .addComponent(btn_Criar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_Novo)
@@ -261,6 +274,24 @@ public class ControlePedidos extends javax.swing.JFrame {
     private void btn_CriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CriarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_CriarActionPerformed
+
+    private void btn_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VoltarActionPerformed
+        // TODO add your handling code here:
+        if(Login.tipoFunc == 1){
+            this.setVisible(false);
+            new MenuGerente().setVisible(true);
+            this.dispose();
+        }
+        else if (Login.tipoFunc == 2){
+            this.setVisible(false);
+            new MenuAtendente().setVisible(true);
+            this.dispose();
+        }else{
+            this.setVisible(false);
+            new MenuEntregador().setVisible(true);
+            this.dispose(); 
+        }
+    }//GEN-LAST:event_btn_VoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,6 +334,7 @@ public class ControlePedidos extends javax.swing.JFrame {
     private javax.swing.JButton btn_Criar;
     private javax.swing.JButton btn_Deletar;
     private javax.swing.JButton btn_Novo;
+    private javax.swing.JButton btn_Voltar;
     private javax.swing.JComboBox<String> cmb_IDPedido;
     private javax.swing.JComboBox<String> cmb_IDSabor;
     private java.awt.Label label1;
