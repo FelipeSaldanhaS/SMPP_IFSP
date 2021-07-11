@@ -35,6 +35,7 @@ public class MenuGerente extends javax.swing.JFrame {
         btn_AbrirCardapio = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         btn_AbrirFunc.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btn_AbrirFunc.setLabel("Funcionários");
@@ -65,9 +66,9 @@ public class MenuGerente extends javax.swing.JFrame {
             }
         });
 
-        btn_AbrirCardapio.setActionCommand("Cardapio");
+        btn_AbrirCardapio.setActionCommand("Cardápio");
         btn_AbrirCardapio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btn_AbrirCardapio.setLabel("Cardapio");
+        btn_AbrirCardapio.setLabel("Cardápio");
         btn_AbrirCardapio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_AbrirCardapioActionPerformed(evt);

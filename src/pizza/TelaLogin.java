@@ -36,6 +36,7 @@ public class TelaLogin extends javax.swing.JFrame {
         txt_Senha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         setSize(new java.awt.Dimension(20, 0));
 
         lbl_Titulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
