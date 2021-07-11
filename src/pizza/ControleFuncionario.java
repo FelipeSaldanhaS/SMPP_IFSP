@@ -96,6 +96,7 @@ public class ControleFuncionario extends javax.swing.JFrame {
         btn_Voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         btn_Criar.setText("CRIAR");
         btn_Criar.addActionListener(new java.awt.event.ActionListener() {

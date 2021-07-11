@@ -34,6 +34,7 @@ public class MenuAtendente extends javax.swing.JFrame {
         btn_AbrirFunc = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lbl_Atende.setAlignment(java.awt.Label.CENTER);
         lbl_Atende.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N

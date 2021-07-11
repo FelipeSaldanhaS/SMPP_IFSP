@@ -73,6 +73,7 @@ public class ControleCardapio extends javax.swing.JFrame {
         btn_Voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lbl_Titulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lbl_Titulo.setText("CARDÁPIO");

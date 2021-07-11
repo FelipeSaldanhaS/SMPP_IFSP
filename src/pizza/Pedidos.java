@@ -26,6 +26,14 @@ import java.sql.Timestamp;
  */
 public class Pedidos {
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
     public String getHora_inicial() {
         return hora_inicial;
     }
@@ -197,12 +205,13 @@ public class Pedidos {
     }
 
 
-    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     private int idpedido, id_sabor, id_func;
+    private int quantidade;
     private double preco;
     private String observacao, telefone, nome_cliente, statusped, placa, endereco, nota_fiscal;
     private String hora_inicial, hora_final;
-    private Connection conn;
+    static Connection conn;
     
     Pedidos(){
          try{
@@ -220,21 +229,22 @@ public class Pedidos {
     
     public int AlterarPed(){
        int res = 0;        
-        String sql = "update pedidos set idpedido = ?, id_sabor = ?, id_func = ?, preco = ?, observacao = ?, telefone = ?, nome_cliente, hora_inicial = ?, hora_final = ?, nota_fiscal = ?, statusped = ?, placa = ?, endereco = ?";
+        String sql = "UPDATE pedidos SET id_sabor = ?, id_func = ?, preco = ?, observacao = ?, telefone = ?, nome_cliente = ?, hora_inicial = ?, hora_final = ?, nota_fiscal = ?, statusped = ?, placa = ?, endereco = ?, quantidade = ? WHERE idpedido = ?";
             try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
-			preparedStatement.setInt(1, this.idpedido);
-			preparedStatement.setInt(2, this.id_sabor);
-			preparedStatement.setInt(3, this.id_func);
-			preparedStatement.setDouble(4, this.preco);
-                        preparedStatement.setString(5, this.observacao);
-                        preparedStatement.setString(6, this.telefone);
-                        preparedStatement.setString(7, this.nome_cliente);
-                        //preparedStatement.setTimesStamp(8, );
-                        //preparedStatement.setString(9, this.getHora_final());
-                        preparedStatement.setString(10, this.nota_fiscal);
-                        preparedStatement.setString(11, this.statusped);
-                        preparedStatement.setString(12, this.placa);
-                        preparedStatement.setString(13, this.endereco);
+			preparedStatement.setInt(1, this.id_sabor);
+			preparedStatement.setInt(2, this.id_func);
+			preparedStatement.setDouble(3, this.preco);
+                        preparedStatement.setString(4, this.observacao);
+                        preparedStatement.setString(5, this.telefone);
+                        preparedStatement.setString(6, this.nome_cliente);
+                        preparedStatement.setString(7, this.getHora_inicial());
+                        preparedStatement.setString(8, this.getHora_final());
+                        preparedStatement.setString(9, this.nota_fiscal);
+                        preparedStatement.setString(10, this.statusped);
+                        preparedStatement.setString(11, this.placa);
+                        preparedStatement.setString(12, this.endereco);
+                        preparedStatement.setInt(13, this.quantidade);
+                        preparedStatement.setInt(14, this.idpedido);
 			preparedStatement.execute();
                         res = 1;
                         preparedStatement.close();
@@ -248,21 +258,21 @@ public class Pedidos {
     
     public int CriarPed(){
          int res = 0;        
-        String sql = "insert into pedidos (id_sabor, id_func, preco, observacao, telefone, nome_cliente, hora_inicial, hora_final, nota_fiscal, statusped, placa, endereco)values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into pedidos (id_sabor, id_func, preco, observacao, telefone, nome_cliente, hora_inicial, hora_final, nota_fiscal, statusped, placa, endereco, quantidade)values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
-			preparedStatement.setInt(1, this.idpedido);
-			preparedStatement.setInt(2, this.id_sabor);
-			preparedStatement.setInt(3, this.id_func);
-			preparedStatement.setDouble(4, this.preco);
-                        preparedStatement.setString(5, this.observacao);
-                        preparedStatement.setString(6, this.telefone);
-                        preparedStatement.setString(7, this.nome_cliente);
-                        preparedStatement.setString(8, this.getHora_inicial());
-                        preparedStatement.setString(9, this.getHora_final());
-                        preparedStatement.setString(10, this.nota_fiscal);
-                        preparedStatement.setString(11, this.statusped);
-                        preparedStatement.setString(12, this.placa);
-                        preparedStatement.setString(13, this.endereco);
+			preparedStatement.setInt(1, this.id_sabor);
+			preparedStatement.setInt(2, this.id_func);
+			preparedStatement.setDouble(3, this.preco);
+                        preparedStatement.setString(4, this.observacao);
+                        preparedStatement.setString(5, this.telefone);
+                        preparedStatement.setString(6, this.nome_cliente);
+                        preparedStatement.setString(7, this.getHora_inicial());
+                        preparedStatement.setString(8, this.getHora_final());
+                        preparedStatement.setString(9, this.nota_fiscal);
+                        preparedStatement.setString(10, this.statusped);
+                        preparedStatement.setString(11, this.placa);
+                        preparedStatement.setString(12, this.endereco);
+                        preparedStatement.setInt(13, this.quantidade);
 			preparedStatement.execute();
                         res = 1;
                         preparedStatement.close();
