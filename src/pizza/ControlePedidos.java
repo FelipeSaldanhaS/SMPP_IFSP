@@ -205,6 +205,11 @@ public class ControlePedidos extends javax.swing.JFrame {
         });
 
         btn_Novo.setText("NOVO");
+        btn_Novo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_NovoActionPerformed(evt);
+            }
+        });
 
         btn_Alterar.setText("ALTERAR");
         btn_Alterar.addActionListener(new java.awt.event.ActionListener() {
@@ -507,6 +512,7 @@ public class ControlePedidos extends javax.swing.JFrame {
        
        int res = p.CriarPed();
        
+       
        if(res == 1){
            showMessageDialog(null, "Inserido com sucesso!");
        }
@@ -720,6 +726,22 @@ public class ControlePedidos extends javax.swing.JFrame {
            showMessageDialog(null, "Excluido com sucesso!");
        }
     }//GEN-LAST:event_btn_DeletarActionPerformed
+
+    private void btn_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NovoActionPerformed
+        // TODO add your handling code here:
+          txt_Nome.setText("");
+          txt_Obs.setText("");
+          txt_HoraI.setText("");
+          txt_HoraF.setText("");
+          txt_Nota.setText("");
+          txt_Status.setText("");
+          txt_Placa.setText("");
+          txt_Preco.setText("");
+          txt_QTD.setText("");
+          txt_Endereco.setText("");
+          txt_Tel.setText("");
+          txt_Entrega.setText("");
+    }//GEN-LAST:event_btn_NovoActionPerformed
 
     /**
      * @param args the command line arguments
