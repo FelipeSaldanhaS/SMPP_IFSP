@@ -297,8 +297,4 @@ public class Pedidos {
 	}
         return res;
     }
-    
-    public void Sair(){
-        
-    }
 }
