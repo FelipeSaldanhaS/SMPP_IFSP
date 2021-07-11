@@ -171,12 +171,4 @@ public class Funcionario {
         return res;
     }
     
-       
-    
-    
-
-    public void Sair(){
-        
-    }
-    
 }
