@@ -512,6 +512,7 @@ public class ControlePedidos extends javax.swing.JFrame {
        
        int res = p.CriarPed();
        
+       
        if(res == 1){
            showMessageDialog(null, "Inserido com sucesso!");
        }

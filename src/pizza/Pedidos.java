@@ -246,13 +246,28 @@ public class Pedidos {
                         preparedStatement.setInt(13, this.quantidade);
                         preparedStatement.setInt(14, this.idpedido);
 			preparedStatement.execute();
-                        res = 1;
+                        res = AlterarAposPed();
                         preparedStatement.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
         
         
+        return res;
+    }
+   
+    private int AlterarAposPed(){
+        int res = 0;
+       String sql = "Update entregador_func SET id_pedido_atual = ? WHERE id_entregador = ?";
+       try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+			preparedStatement.setInt(1, this.idpedido);
+			preparedStatement.setInt(2, this.id_func);
+			preparedStatement.execute();
+                        res = 1;
+                        preparedStatement.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
         return res;
     }
     
@@ -274,7 +289,7 @@ public class Pedidos {
                         preparedStatement.setString(12, this.endereco);
                         preparedStatement.setInt(13, this.quantidade);
 			preparedStatement.execute();
-                        res = 1;
+                        res = AlterarAposPed();
                         preparedStatement.close();
 		}catch(SQLException e){
 			e.printStackTrace();

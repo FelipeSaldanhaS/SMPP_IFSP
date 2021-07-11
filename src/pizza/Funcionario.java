@@ -20,6 +20,22 @@ import java.util.List;
  * @author fefes
  */
 public class Funcionario {
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public String getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(String veiculo) {
+        this.veiculo = veiculo;
+    }
     
     public int getIdfunc() {
         return idfunc;
@@ -88,6 +104,7 @@ public class Funcionario {
     
     private int idfunc, tipo;
     private String cpf, nome, endereco, email, senha, telefone;
+    private String placa,veiculo;
     static Connection conn;
     
     Funcionario() {
@@ -129,6 +146,40 @@ public class Funcionario {
         return res;
     }
     
+    
+    public int AdicionarAposFunc(){
+       int res = 0;
+       String sql = "Insert into entregador_func(id_entregador, placa, veiculo) VALUES(?,?,?)";
+       try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+			preparedStatement.setInt(1, this.idfunc);
+                        preparedStatement.setString(2, this.getPlaca());
+			preparedStatement.setString(3, this.getVeiculo());
+			preparedStatement.execute();
+                        res = 1;
+                        preparedStatement.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+                        System.err.println("Erro no ADD! ");
+		}
+        return res;
+    }
+    
+     public int AlterarAposFunc(){
+       int res = 0;
+       String sql = "Update entregador_func SET placa = ?, veiculo = ? WHERE id_entregador = ?";
+       try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+                        preparedStatement.setString(1, this.getPlaca());
+			preparedStatement.setString(2, this.getVeiculo());
+                        preparedStatement.setInt(3, this.idfunc);
+			preparedStatement.execute();
+                        res = 1;
+                        preparedStatement.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+        return res;
+    }
+    
     public int CriarFunc(){
         int res = 0;
         String sql = "insert into loginfuncionario(senha,tipo,cpf,idfunc,nome,endereco,telefone,email)values(MD5(?),?,?,?,?,?,?,?)";
@@ -142,8 +193,7 @@ public class Funcionario {
                         preparedStatement.setString(6, this.endereco);
                         preparedStatement.setString(7, this.telefone);
                         preparedStatement.setString(8, this.getEmail());
-			//executando comando sql
-			
+			//executando comando sql        
 			preparedStatement.execute();
                         res = 1;
 			preparedStatement.close();

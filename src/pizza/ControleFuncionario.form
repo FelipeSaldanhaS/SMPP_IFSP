@@ -28,6 +28,10 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="lbl_CPF2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txt_Veiculo" min="-2" pref="127" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btn_Novo" max="32767" attributes="0"/>
                           <Component id="btn_Criar" min="-2" pref="71" max="-2" attributes="0"/>
@@ -54,11 +58,6 @@
                                       <Component id="txt_Senha" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbl_CPF" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txt_CPF" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
                                       <Component id="lbl_Email" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txt_Email" max="32767" attributes="0"/>
@@ -77,6 +76,23 @@
                                       <Component id="lbl_Tipo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txt_Tipo" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="lbl_CPF" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbl_CPF1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txt_CPF" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                              <Component id="txt_Placa" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -148,11 +164,24 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btn_Criar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_Alterar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_Placa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_CPF1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btn_Novo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_Deletar" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btn_Novo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_Deletar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txt_Veiculo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_CPF2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -279,6 +308,20 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_VoltarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_Placa">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_CPF1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Placa:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_Veiculo">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_CPF2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Veiculo:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

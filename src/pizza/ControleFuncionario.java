@@ -94,6 +94,10 @@ public class ControleFuncionario extends javax.swing.JFrame {
         lbl_Senha = new javax.swing.JLabel();
         txt_Senha = new javax.swing.JPasswordField();
         btn_Voltar = new javax.swing.JButton();
+        txt_Placa = new javax.swing.JTextField();
+        lbl_CPF1 = new javax.swing.JLabel();
+        txt_Veiculo = new javax.swing.JTextField();
+        lbl_CPF2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -169,6 +173,10 @@ public class ControleFuncionario extends javax.swing.JFrame {
             }
         });
 
+        lbl_CPF1.setText("Placa:");
+
+        lbl_CPF2.setText("Veiculo:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,6 +185,10 @@ public class ControleFuncionario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lbl_CPF2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_Veiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_Novo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_Criar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -198,10 +210,6 @@ public class ControleFuncionario extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txt_Senha))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(lbl_CPF)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_CPF))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(lbl_Email)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txt_Email))
@@ -216,7 +224,19 @@ public class ControleFuncionario extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lbl_Tipo)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_Tipo))))
+                                        .addComponent(txt_Tipo))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lbl_CPF)
+                                            .addComponent(lbl_CPF1))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txt_CPF))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(4, 4, 4)
+                                                .addComponent(txt_Placa)
+                                                .addGap(101, 101, 101))))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btn_Voltar)
@@ -269,11 +289,20 @@ public class ControleFuncionario extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Criar)
-                    .addComponent(btn_Alterar))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Novo)
-                    .addComponent(btn_Deletar))
+                    .addComponent(btn_Alterar)
+                    .addComponent(txt_Placa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_CPF1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_Novo)
+                            .addComponent(btn_Deletar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_Veiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_CPF2))))
                 .addContainerGap())
         );
 
@@ -289,6 +318,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
        String Telefone = txt_Tel.getText();
        String CPF = txt_CPF.getText();
        String Email = txt_Email.getText();
+       String Placa = txt_Placa.getText();
+       String Veiculo = txt_Veiculo.getText();
        
        f.setSenha(Senha);
        f.setNome(Nome);
@@ -297,10 +328,43 @@ public class ControleFuncionario extends javax.swing.JFrame {
        f.setTelefone(Telefone);
        f.setCpf(CPF);
        f.setEmail(Email);
+       f.setPlaca(Placa);
+       f.setVeiculo(Veiculo);
+       
+
        int res = f.CriarFunc();
+       
+       if(Tipo == 3){   
+        try
+        {
+          String myDriver = "org.gjt.mm.mysql.Driver";
+          String myUrl = "jdbc:mysql://localhost/pizzaria";
+          Class.forName(myDriver);
+          Connection conn = DriverManager.getConnection(myUrl, "root", "");
+          
+          String queryt = "SELECT MAX(idfunc) as Max FROM loginfuncionario";
+          
+          Statement stT = conn.createStatement();
+          
+          ResultSet rsT = stT.executeQuery(queryt);
+          
+          rsT.next();
+          int IDfunc_t3 = Integer.parseInt(rsT.getInt("Max")+"");
+        
+          f.setIdfunc(IDfunc_t3);
+          
+          res = f.AdicionarAposFunc();
+          stT.close();
+        } 
+        catch (Exception e)
+        {
+          System.err.println("Erro no TIPO 3! ");
+          System.err.println(e.getMessage());
+        }
        
        if(res == 1){
            showMessageDialog(null, "Inserido com sucesso!");
+       }
        }
     }//GEN-LAST:event_btn_CriarActionPerformed
 
@@ -316,6 +380,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         String Telefone = txt_Tel.getText();
         String CPF = txt_CPF.getText();
         String Email = txt_Email.getText();
+        String Placa = txt_Placa.getText();
+        String Veiculo = txt_Veiculo.getText();
 
         f.setIdfunc(ID);
         f.setSenha(Senha);
@@ -325,8 +391,15 @@ public class ControleFuncionario extends javax.swing.JFrame {
         f.setTelefone(Telefone);
         f.setCpf(CPF);
         f.setEmail(Email);
+        f.setPlaca(Placa);
+        f.setVeiculo(Veiculo);
 
         int res = f.AlterarFunc();
+        
+        
+            if(Tipo == 3){
+                res = f.AlterarAposFunc();
+            }
 
         if(res == 1){
             showMessageDialog(null, "Alterado com sucesso!");
@@ -341,6 +414,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
         String Telefone = txt_Tel.getText();
         String CPF = txt_CPF.getText();
         String Email = txt_Email.getText();
+        String Placa = txt_Placa.getText();
+        String Veiculo = txt_Veiculo.getText();
 
         f.setIdfunc(ID);
         f.setSenha(Senha);
@@ -350,8 +425,15 @@ public class ControleFuncionario extends javax.swing.JFrame {
         f.setTelefone(Telefone);
         f.setCpf(CPF);
         f.setEmail(Email);
+        f.setPlaca(Placa);
+        f.setVeiculo(Veiculo);
 
         int res = f.AlterarFunc();
+        
+        if(Tipo == 3){
+                res = f.AlterarAposFunc();
+            }
+        
 
         if(res == 1){
             showMessageDialog(null, "Alterado com sucesso!");
@@ -421,11 +503,18 @@ public class ControleFuncionario extends javax.swing.JFrame {
           
           String query = "SELECT * FROM loginfuncionario WHERE idfunc ="+cmb_ID.getSelectedItem()+"";
           
+          String query1 = "SELECT * FROM entregador_func WHERE id_entregador ="+cmb_ID.getSelectedItem()+"";
+          
           Statement st = conn.createStatement();
           
           ResultSet rs = st.executeQuery(query);
           
+          Statement st1 = conn.createStatement();
+          
+          ResultSet rs1 = st1.executeQuery(query1);
+          
           rs.next();
+          rs1.next();
           
           txt_Nome.setText(rs.getString("nome"));
           txt_Endereco.setText(rs.getString("endereco"));
@@ -433,8 +522,11 @@ public class ControleFuncionario extends javax.swing.JFrame {
           txt_Email.setText(rs.getString("email"));
           txt_Tipo.setText(rs.getInt("tipo")+"");
           txt_CPF.setText(rs.getString("cpf"));
+          txt_Placa.setText(rs1.getString("placa"));
+          txt_Veiculo.setText(rs1.getString("veiculo"));
           
           st.close();
+          st1.close();
           
         }
         catch (Exception e)
@@ -518,6 +610,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton btn_Voltar;
     private javax.swing.JComboBox<String> cmb_ID;
     private javax.swing.JLabel lbl_CPF;
+    private javax.swing.JLabel lbl_CPF1;
+    private javax.swing.JLabel lbl_CPF2;
     private javax.swing.JLabel lbl_Email;
     private javax.swing.JLabel lbl_Endereco;
     private javax.swing.JLabel lbl_ID;
@@ -530,8 +624,10 @@ public class ControleFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Email;
     private javax.swing.JTextField txt_Endereco;
     private javax.swing.JTextField txt_Nome;
+    private javax.swing.JTextField txt_Placa;
     private javax.swing.JPasswordField txt_Senha;
     private javax.swing.JTextField txt_Tel;
     private javax.swing.JTextField txt_Tipo;
+    private javax.swing.JTextField txt_Veiculo;
     // End of variables declaration//GEN-END:variables
 }
