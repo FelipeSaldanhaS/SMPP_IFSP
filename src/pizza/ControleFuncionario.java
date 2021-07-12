@@ -546,6 +546,8 @@ public class ControleFuncionario extends javax.swing.JFrame {
           txt_Email.setText("");
           txt_Tipo.setText("");
           txt_CPF.setText("");
+          txt_Placa.setText("");
+          txt_Veiculo.setText("");
     }//GEN-LAST:event_btn_NovoActionPerformed
 
     private void btn_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VoltarActionPerformed
